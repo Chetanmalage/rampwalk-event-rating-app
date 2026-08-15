@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rampwalk Live</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+</head>
+<body>
+
+    <!-- ADMIN LOGIN OVERLAY -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-icon">🔐</div>
+            <h2 class="login-title">Admin Access</h2>
+            <p class="login-sub">Enter your password to manage the rampwalk.</p>
+            <input type="password" id="adminPassword" class="login-input" placeholder="Enter admin password" autocomplete="off" />
+            <!-- inline onclick -->
+            <button class="login-btn" id="loginBtn" onclick="window.attemptLogin()">Unlock Admin Panel</button>
+            <p class="login-error" id="loginError">Incorrect password. Try again.</p>
+            <button class="login-close" id="loginClose">✕</button>
+        </div>
+    </div>
+
+    <!-- APP -->
+    <div class="app" id="app">
+        <header class="header">
+            <div class="header-left">
+                <span class="header-logo">✦ Rampwalk</span>
+                <span class="header-badge">
+                    <span class="dot live" id="statusDot"></span>
+                    <span id="statusLabel">Live</span>
+                </span>
+            </div>
+            <div class="header-right">
+                <span class="header-current" id="headerCurrent">
+                    Current: <strong id="headerParticipant">—</strong>
+                </span>
+                <!-- inline onclick for admin toggle -->
+                <button class="admin-toggle-btn" id="adminToggleBtn" onclick="window.toggleAdmin()">
+                    👑 Admin
+                </button>
+            </div>
+        </header>
+
+        <div class="grid" id="gridContainer">
+            <!-- ADMIN PANEL (hidden by default) -->
+            <section class="card admin-panel" id="adminPanel">
+                <div class="card-title">
+                    <span class="icon">👑</span> Admin Panel
+                    <span class="admin-lock" id="adminLock">🔒</span>
+                </div>
+                <div class="admin-protected" id="adminProtected">
+                    <p class="admin-lock-msg">🔒 Admin panel is locked. Click the "Admin" button above to login.</p>
+                </div>
+                <div class="admin-content" id="adminContent">
+                    <label for="participantName" style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">
+                        Participant Name
+                    </label>
+                    <input type="text" id="participantName" class="admin-name-input" placeholder="e.g. 1 Sakshi" autocomplete="off" />
+                    <button class="btn btn-primary mt-8" id="startPollBtn">🚀 Start Poll</button>
+                    <hr class="card-divider" />
+                    <div style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">
+                        📋 All Participants
+                    </div>
+                    <div class="participant-list" id="participantList">
+                        <div class="text-muted" style="padding:8px 0;font-size:0.85rem;">No participants yet</div>
+                    </div>
+                    <hr class="card-divider" />
+                    <div class="danger-zone">
+                        <span class="label">⚠️ Danger Zone</span>
+                        <div class="btn-group">
+                            <button class="btn btn-gold" id="resetMemoryBtn">🔄 Reset Browser Memory</button>
+                            <button class="btn btn-danger" id="deleteAllBtn">🗑️ Delete All Records</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RATING PANEL (always visible) -->
+            <section class="card" id="ratingPanel">
+                <div class="card-title"><span class="icon">⭐</span> Rate Participant</div>
+                <div class="rating-participant idle" id="ratingParticipant">Waiting for poll to start…</div>
+                <div id="ratingButtonsWrapper" class="rating-buttons">
+                    <button class="rating-btn r-1" data-value="1">1 <span class="label">Poor</span></button>
+                    <button class="rating-btn r-2" data-value="2">2 <span class="label">Fair</span></button>
+                    <button class="rating-btn r-3" data-value="3">3 <span class="label">Good</span></button>
+                    <button class="rating-btn r-4" data-value="4">4 <span class="label">Great</span></button>
+                    <button class="rating-btn r-5" data-value="5">5 <span class="label">Excellent</span></button>
+                </div>
+                <div class="rating-message" id="ratingMessage">✅ Thanks for rating!</div>
+                <hr class="card-divider" />
+                <div class="card-title" style="margin-bottom:8px;"><span class="icon">📊</span> Live Results</div>
+                <div class="results-stats">
+                    <span class="results-avg" id="avgDisplay">— <span class="denom">/ 5</span></span>
+                    <span class="results-votes" id="votesDisplay">0 votes</span>
+                </div>
+                <div class="chart-wrapper"><canvas id="ratingChart"></canvas></div>
+                <div class="no-data" id="noDataMsg">No ratings yet</div>
+            </section>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">✅</span>
+        <span id="toastMessage">Message</span>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+                "firebase/database": "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"
+            }
+        }
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
