@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
 </head>
+
 <body>
 
     <!-- ADMIN LOGIN OVERLAY -->
@@ -16,7 +18,8 @@
             <div class="login-icon">🔐</div>
             <h2 class="login-title">Admin Access</h2>
             <p class="login-sub">Enter your password to manage the rampwalk.</p>
-            <input type="password" id="adminPassword" class="login-input" placeholder="Enter admin password" autocomplete="off" />
+            <input type="password" id="adminPassword" class="login-input" placeholder="Enter admin password"
+                autocomplete="off" />
             <!-- inline onclick -->
             <button class="login-btn" id="loginBtn" onclick="window.attemptLogin()">Unlock Admin Panel</button>
             <p class="login-error" id="loginError">Incorrect password. Try again.</p>
@@ -56,10 +59,12 @@
                     <p class="admin-lock-msg">🔒 Admin panel is locked. Click the "Admin" button above to login.</p>
                 </div>
                 <div class="admin-content" id="adminContent">
-                    <label for="participantName" style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">
+                    <label for="participantName"
+                        style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">
                         Participant Name
                     </label>
-                    <input type="text" id="participantName" class="admin-name-input" placeholder="e.g. 1 Sakshi" autocomplete="off" />
+                    <input type="text" id="participantName" class="admin-name-input" placeholder="e.g. 1 Sakshi"
+                        autocomplete="off" />
                     <button class="btn btn-primary mt-8" id="startPollBtn">🚀 Start Poll</button>
                     <hr class="card-divider" />
                     <div style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">
@@ -119,4 +124,5 @@
     </script>
     <script type="module" src="script.js"></script>
 </body>
+
 </html>
